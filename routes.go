@@ -33,6 +33,54 @@ func setupVideogamesRoutes(router *mux.Router) {
 			respondWithError(err, w)
 		}
 	}).Methods(http.MethodGet)
+
+	router.HandleFunc("/videogame/{id}", func(w http.ResponseWriter, r *http.Request) {
+		idString := mux.Vars(r)["id"]
+		id, err := stringToInt64(idString)
+		if err != nil {
+			respondWithError(err, w)
+			return
+		}
+		err = deleteVideogame(id)
+		if err != nil {
+			respondWithSuccess(true, w)
+		} else {
+			respondWithError(err, w)
+		}
+	}).Methods(http.MethodDelete)
+
+	router.HandleFunc("/videogame", func(w http.ResponseWriter, r *http.Request) {
+		var videogame VideoGame
+		err := json.NewDecoder(r.Body).Decode(&videogame)
+		if err != nil {
+			respondWithError(err, w)
+
+		} else {
+			err := createVideogame(videogame)
+			if err != nil {
+				respondWithSuccess(videogame, w)
+			} else {
+				respondWithError(err, w)
+			}
+		}
+	}).Methods(http.MethodPost)
+
+	router.HandleFunc("/videogame", func(w http.ResponseWriter, r *http.Request) {
+		var videogame VideoGame
+		err := json.NewDecoder(r.Body).Decode(&videogame)
+		if err != nil {
+			respondWithError(err, w)
+
+		} else {
+			err := createVideogame(videogame)
+			if err != nil {
+				respondWithSuccess(videogame, w)
+			} else {
+				respondWithError(err, w)
+			}
+		}
+	}).Methods(http.MethodPut)
+
 }
 
 func enableCORS(router *mux.Router) {

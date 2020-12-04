@@ -10,9 +10,10 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
-var _ = godotenv.load(".env")
+var _ = godotenv.Load()
 
 var (
 	ConnectionString = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
