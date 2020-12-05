@@ -13,9 +13,9 @@ func setupVideogamesRoutes(router *mux.Router) {
 	router.HandleFunc("/videogames", func(w http.ResponseWriter, r *http.Request) {
 		videogames, err := getVideogames()
 		if err != nil {
-			respondWithSuccess(videogames, w)
-		} else {
 			respondWithError(err, w)
+		} else {
+			respondWithSuccess(videogames, w)
 		}
 	}).Methods(http.MethodGet)
 
@@ -28,9 +28,9 @@ func setupVideogamesRoutes(router *mux.Router) {
 		}
 		videogame, err := getVideogameById(id)
 		if err != nil {
-			respondWithSuccess(videogame, w)
-		} else {
 			respondWithError(err, w)
+		} else {
+			respondWithSuccess(videogame, w)
 		}
 	}).Methods(http.MethodGet)
 
@@ -43,9 +43,9 @@ func setupVideogamesRoutes(router *mux.Router) {
 		}
 		err = deleteVideogame(id)
 		if err != nil {
-			respondWithSuccess(true, w)
-		} else {
 			respondWithError(err, w)
+		} else {
+			respondWithSuccess(true, w)
 		}
 	}).Methods(http.MethodDelete)
 
@@ -58,9 +58,9 @@ func setupVideogamesRoutes(router *mux.Router) {
 		} else {
 			err := createVideogame(videogame)
 			if err != nil {
-				respondWithSuccess(videogame, w)
-			} else {
 				respondWithError(err, w)
+			} else {
+				respondWithSuccess(true, w)
 			}
 		}
 	}).Methods(http.MethodPost)
@@ -74,9 +74,9 @@ func setupVideogamesRoutes(router *mux.Router) {
 		} else {
 			err := createVideogame(videogame)
 			if err != nil {
-				respondWithSuccess(videogame, w)
-			} else {
 				respondWithError(err, w)
+			} else {
+				respondWithSuccess(true, w)
 			}
 		}
 	}).Methods(http.MethodPut)
